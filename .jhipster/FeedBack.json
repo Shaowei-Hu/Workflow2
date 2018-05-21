@@ -1,0 +1,30 @@
+{
+    "fields": [
+        {
+            "fieldName": "question1",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "question2",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "question3",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "question4",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20180520175417",
+    "entityTableName": "feed_back",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

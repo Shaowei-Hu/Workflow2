@@ -40,6 +40,15 @@ public class CacheConfiguration {
             cm.createCache(com.shaowei.workflow.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(com.shaowei.workflow.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(com.shaowei.workflow.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(com.shaowei.workflow.domain.Trader.class.getName(), jcacheConfiguration);
+            cm.createCache(com.shaowei.workflow.domain.Trader.class.getName() + ".teams", jcacheConfiguration);
+            cm.createCache(com.shaowei.workflow.domain.Team.class.getName(), jcacheConfiguration);
+            cm.createCache(com.shaowei.workflow.domain.Team.class.getName() + ".traders", jcacheConfiguration);
+            cm.createCache(com.shaowei.workflow.domain.Client.class.getName(), jcacheConfiguration);
+            cm.createCache(com.shaowei.workflow.domain.Action.class.getName(), jcacheConfiguration);
+            cm.createCache(com.shaowei.workflow.domain.FeedBack.class.getName(), jcacheConfiguration);
+            cm.createCache(com.shaowei.workflow.domain.Region.class.getName(), jcacheConfiguration);
+            cm.createCache(com.shaowei.workflow.domain.Type.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

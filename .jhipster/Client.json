@@ -1,0 +1,77 @@
+{
+    "fields": [
+        {
+            "fieldName": "clientCode",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "companyName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "location",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "manager",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "diagnostic",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "companyNanme",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "alert",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "score",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "businessSirteria1",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "businessSirteria2",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "businessData",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "trader",
+            "otherEntityName": "trader",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "region",
+            "otherEntityName": "region",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "type",
+            "otherEntityName": "type",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20180520175415",
+    "entityTableName": "client",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

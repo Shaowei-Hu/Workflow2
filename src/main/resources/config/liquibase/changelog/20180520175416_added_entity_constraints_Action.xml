@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Action.
+    -->
+    <changeSet id="20180520175416-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="feed_back_id"
+                                 baseTableName="action"
+                                 constraintName="fk_action_feed_back_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="feed_back"/>
+
+        <addForeignKeyConstraint baseColumnNames="client_id"
+                                 baseTableName="action"
+                                 constraintName="fk_action_client_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="client"/>
+
+    </changeSet>
+</databaseChangeLog>

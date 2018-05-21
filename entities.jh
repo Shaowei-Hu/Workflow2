@@ -1,0 +1,110 @@
+entity Trader {
+
+    name String
+
+}
+
+entity Team {
+	name String
+}
+
+ 
+entity Client {
+
+    clientCode Long,
+    companyName String,
+    location String,
+    manager String,
+    diagnostic String,
+    companyNanme String,
+    location String,
+    clientCode Long,
+    alert String,
+    score Integer,
+    manager String,
+    businessSirteria1 String,
+    businessSirteria2 String,
+    businessData String
+
+}
+
+ 
+
+entity Action {
+
+    name String,
+    manager String,
+    date ZonedDateTime
+
+}
+
+ 
+
+entity FeedBack {
+
+    question1 String,
+    question2 String,
+    question3 String,
+    question4 String
+
+}
+
+ 
+
+entity Region {
+
+    name String
+
+}
+
+ 
+
+entity Type {
+
+   name String
+
+}
+
+ 
+
+ 
+
+relationship OneToOne {
+
+    Action{feedBack} to FeedBack
+
+}
+
+ 
+relationship ManyToOne {
+
+    Action{client} to Client,
+
+    Client{trader} to Trader,
+
+    Client{region(name)} to Region,
+
+    Client{type(name)} to Type
+
+}
+
+relationship ManyToMany {
+	Team{trader} to Trader{team}
+}
+
+
+ 
+
+// Set pagination options
+
+paginate * with pagination
+
+ 
+
+// Set service options to all except few
+
+service all with serviceImpl
+
+ 
+
+dto * with mapstruct

@@ -1,0 +1,26 @@
+{
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "team",
+            "otherEntityName": "team",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "trader"
+        }
+    ],
+    "changelogDate": "20180520175413",
+    "entityTableName": "trader",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

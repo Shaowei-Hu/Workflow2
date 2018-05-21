@@ -1,0 +1,35 @@
+
+{
+    "workflow2App": {
+        "client" : {
+            "home": {
+                "title": "Clients",
+                "createLabel": "Create a new Client",
+                "createOrEditLabel": "Create or edit a Client"
+            },
+            "created": "A new Client is created with identifier {{ param }}",
+            "updated": "A Client is updated with identifier {{ param }}",
+            "deleted": "A Client is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Client {{ id }}?"
+            },
+            "detail": {
+                "title": "Client"
+            },
+            "clientCode": "Client Code",
+            "companyName": "Company Name",
+            "location": "Location",
+            "manager": "Manager",
+            "diagnostic": "Diagnostic",
+            "companyNanme": "Company Nanme",
+            "alert": "Alert",
+            "score": "Score",
+            "businessSirteria1": "Business Sirteria 1",
+            "businessSirteria2": "Business Sirteria 2",
+            "businessData": "Business Data",
+            "trader": "Trader",
+            "region": "Region",
+            "type": "Type"
+        }
+    }
+}

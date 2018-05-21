@@ -1,0 +1,85 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="client">
+            <h2><span jhiTranslate="workflow2App.client.detail.title">Client</span> {{client.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="workflow2App.client.clientCode">Client Code</span></dt>
+                <dd>
+                    <span>{{client.clientCode}}</span>
+                </dd>
+                <dt><span jhiTranslate="workflow2App.client.companyName">Company Name</span></dt>
+                <dd>
+                    <span>{{client.companyName}}</span>
+                </dd>
+                <dt><span jhiTranslate="workflow2App.client.location">Location</span></dt>
+                <dd>
+                    <span>{{client.location}}</span>
+                </dd>
+                <dt><span jhiTranslate="workflow2App.client.manager">Manager</span></dt>
+                <dd>
+                    <span>{{client.manager}}</span>
+                </dd>
+                <dt><span jhiTranslate="workflow2App.client.diagnostic">Diagnostic</span></dt>
+                <dd>
+                    <span>{{client.diagnostic}}</span>
+                </dd>
+                <dt><span jhiTranslate="workflow2App.client.companyNanme">Company Nanme</span></dt>
+                <dd>
+                    <span>{{client.companyNanme}}</span>
+                </dd>
+                <dt><span jhiTranslate="workflow2App.client.alert">Alert</span></dt>
+                <dd>
+                    <span>{{client.alert}}</span>
+                </dd>
+                <dt><span jhiTranslate="workflow2App.client.score">Score</span></dt>
+                <dd>
+                    <span>{{client.score}}</span>
+                </dd>
+                <dt><span jhiTranslate="workflow2App.client.businessSirteria1">Business Sirteria 1</span></dt>
+                <dd>
+                    <span>{{client.businessSirteria1}}</span>
+                </dd>
+                <dt><span jhiTranslate="workflow2App.client.businessSirteria2">Business Sirteria 2</span></dt>
+                <dd>
+                    <span>{{client.businessSirteria2}}</span>
+                </dd>
+                <dt><span jhiTranslate="workflow2App.client.businessData">Business Data</span></dt>
+                <dd>
+                    <span>{{client.businessData}}</span>
+                </dd>
+                <dt><span jhiTranslate="workflow2App.client.trader">Trader</span></dt>
+                <dd>
+                    <div *ngIf="client.traderId">
+                        <a [routerLink]="['/trader', client.traderId, 'view']">{{client.traderId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="workflow2App.client.region">Region</span></dt>
+                <dd>
+                    <div *ngIf="client.regionId">
+                        <a [routerLink]="['/region', client.regionId, 'view']">{{client.regionName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="workflow2App.client.type">Type</span></dt>
+                <dd>
+                    <div *ngIf="client.typeId">
+                        <a [routerLink]="['/type', client.typeId, 'view']">{{client.typeName}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <span class="fas fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/client', client.id, 'edit']"
+                    class="btn btn-primary">
+                <span class="fas fa-pencil-alt"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

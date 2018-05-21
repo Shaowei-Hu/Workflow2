@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="feedBack">
+            <h2><span jhiTranslate="workflow2App.feedBack.detail.title">Feed Back</span> {{feedBack.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="workflow2App.feedBack.question1">Question 1</span></dt>
+                <dd>
+                    <span>{{feedBack.question1}}</span>
+                </dd>
+                <dt><span jhiTranslate="workflow2App.feedBack.question2">Question 2</span></dt>
+                <dd>
+                    <span>{{feedBack.question2}}</span>
+                </dd>
+                <dt><span jhiTranslate="workflow2App.feedBack.question3">Question 3</span></dt>
+                <dd>
+                    <span>{{feedBack.question3}}</span>
+                </dd>
+                <dt><span jhiTranslate="workflow2App.feedBack.question4">Question 4</span></dt>
+                <dd>
+                    <span>{{feedBack.question4}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <span class="fas fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/feed-back', feedBack.id, 'edit']"
+                    class="btn btn-primary">
+                <span class="fas fa-pencil-alt"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

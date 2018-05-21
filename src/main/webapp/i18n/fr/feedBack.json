@@ -1,0 +1,25 @@
+
+{
+    "workflow2App": {
+        "feedBack" : {
+            "home": {
+                "title": "FeedBacks",
+                "createLabel": "Créer un nouveau Feed Back",
+                "createOrEditLabel": "Créer ou éditer un Feed Back"
+            },
+            "created": "Un nouveau Feed Back a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Feed Back avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Feed Back avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Feed Back {{ id }} ?"
+            },
+            "detail": {
+                "title": "Feed Back"
+            },
+            "question1": "Question 1",
+            "question2": "Question 2",
+            "question3": "Question 3",
+            "question4": "Question 4"
+        }
+    }
+}

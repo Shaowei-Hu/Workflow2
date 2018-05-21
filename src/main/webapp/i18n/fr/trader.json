@@ -1,0 +1,23 @@
+
+{
+    "workflow2App": {
+        "trader" : {
+            "home": {
+                "title": "Traders",
+                "createLabel": "Créer un nouveau Trader",
+                "createOrEditLabel": "Créer ou éditer un Trader"
+            },
+            "created": "Un nouveau Trader a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Trader avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Trader avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Trader {{ id }} ?"
+            },
+            "detail": {
+                "title": "Trader"
+            },
+            "name": "Name",
+            "team": "Team"
+        }
+    }
+}

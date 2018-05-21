@@ -1,0 +1,100 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-client-heading" jhiTranslate="workflow2App.client.home.createOrEditLabel">Create or edit a Client</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!client.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="client.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="workflow2App.client.clientCode" for="field_clientCode">Client Code</label>
+                    <input type="number" class="form-control" name="clientCode" id="field_clientCode"
+                        [(ngModel)]="client.clientCode" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="workflow2App.client.companyName" for="field_companyName">Company Name</label>
+                    <input type="text" class="form-control" name="companyName" id="field_companyName"
+                        [(ngModel)]="client.companyName" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="workflow2App.client.location" for="field_location">Location</label>
+                    <input type="text" class="form-control" name="location" id="field_location"
+                        [(ngModel)]="client.location" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="workflow2App.client.manager" for="field_manager">Manager</label>
+                    <input type="text" class="form-control" name="manager" id="field_manager"
+                        [(ngModel)]="client.manager" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="workflow2App.client.diagnostic" for="field_diagnostic">Diagnostic</label>
+                    <input type="text" class="form-control" name="diagnostic" id="field_diagnostic"
+                        [(ngModel)]="client.diagnostic" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="workflow2App.client.companyNanme" for="field_companyNanme">Company Nanme</label>
+                    <input type="text" class="form-control" name="companyNanme" id="field_companyNanme"
+                        [(ngModel)]="client.companyNanme" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="workflow2App.client.alert" for="field_alert">Alert</label>
+                    <input type="text" class="form-control" name="alert" id="field_alert"
+                        [(ngModel)]="client.alert" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="workflow2App.client.score" for="field_score">Score</label>
+                    <input type="number" class="form-control" name="score" id="field_score"
+                        [(ngModel)]="client.score" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="workflow2App.client.businessSirteria1" for="field_businessSirteria1">Business Sirteria 1</label>
+                    <input type="text" class="form-control" name="businessSirteria1" id="field_businessSirteria1"
+                        [(ngModel)]="client.businessSirteria1" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="workflow2App.client.businessSirteria2" for="field_businessSirteria2">Business Sirteria 2</label>
+                    <input type="text" class="form-control" name="businessSirteria2" id="field_businessSirteria2"
+                        [(ngModel)]="client.businessSirteria2" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="workflow2App.client.businessData" for="field_businessData">Business Data</label>
+                    <input type="text" class="form-control" name="businessData" id="field_businessData"
+                        [(ngModel)]="client.businessData" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="workflow2App.client.trader" for="field_trader">Trader</label>
+                    <select class="form-control" id="field_trader" name="trader" [(ngModel)]="client.traderId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="traderOption.id" *ngFor="let traderOption of traders; trackBy: trackTraderById">{{traderOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="workflow2App.client.region" for="field_region">Region</label>
+                    <select class="form-control" id="field_region" name="region" [(ngModel)]="client.regionId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="regionOption.id" *ngFor="let regionOption of regions; trackBy: trackRegionById">{{regionOption.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="workflow2App.client.type" for="field_type">Type</label>
+                    <select class="form-control" id="field_type" name="type" [(ngModel)]="client.typeId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="typeOption.id" *ngFor="let typeOption of types; trackBy: trackTypeById">{{typeOption.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <span class="fas fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <span class="fas fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
