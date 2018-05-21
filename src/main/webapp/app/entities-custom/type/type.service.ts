@@ -1,24 +1,38 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
-import { SERVER_API_URL } from '../../app.constants';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
-import { Type } from '../../entities/type/type.model';
-import { ResponseWrapper, createRequestOption } from '../../shared';
+import { SERVER_API_URL } from 'app/app.constants';
+import { createRequestOption } from 'app/shared';
+import { IType } from 'app/shared/model/type.model';
+
+type EntityResponseType = HttpResponse<IType>;
+type EntityArrayResponseType = HttpResponse<IType[]>;
 
 @Injectable()
 export class TypeService {
+    private resourceUrl = SERVER_API_URL + 'api/types';
 
-    private resourceUrl = SERVER_API_URL + 'api/type';
-    private resourceSearchUrl = SERVER_API_URL + 'api/_search/type';
+    constructor(private http: HttpClient) {}
 
-    constructor(private http: Http) { }
-
-    searchByCode(req?: any): Observable<Type> {
-        return this.http.get(this.resourceSearchUrl + '/byCode/' + req)
-            .map((res: Response) => {
-                return res.json();
-            });
+    create(type: IType): Observable<EntityResponseType> {
+        return this.http.post<IType>(this.resourceUrl, type, { observe: 'response' });
     }
 
+    update(type: IType): Observable<EntityResponseType> {
+        return this.http.put<IType>(this.resourceUrl, type, { observe: 'response' });
+    }
+
+    find(id: number): Observable<EntityResponseType> {
+        return this.http.get<IType>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    }
+
+    query(req?: any): Observable<EntityArrayResponseType> {
+        const options = createRequestOption(req);
+        return this.http.get<IType[]>(this.resourceUrl, { params: options, observe: 'response' });
+    }
+
+    delete(id: number): Observable<HttpResponse<any>> {
+        return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    }
 }

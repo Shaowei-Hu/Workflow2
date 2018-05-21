@@ -1,28 +1,27 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { BigDataForLifeSharedModule } from '../../shared';
+import { Workflow2SharedModule } from 'app/shared';
 import {
     RegionService,
+    RegionComponent,
     RegionDetailComponent,
+    RegionUpdateComponent,
+    RegionDeletePopupComponent,
+    RegionDeleteDialogComponent,
+    regionRoute,
+    regionPopupRoute,
+    RegionResolve,
+    RegionResolvePagingParams
 } from './';
 
-@NgModule({
-    imports: [
-        BigDataForLifeSharedModule,
-    ],
-    declarations: [
-        RegionDetailComponent,
-    ],
-    entryComponents: [
-    ],
-    providers: [
-        RegionService,
+const ENTITY_STATES = [...regionRoute, ...regionPopupRoute];
 
-    ],
-    exports: [
-        RegionDetailComponent,
-    ],
+@NgModule({
+    imports: [Workflow2SharedModule, RouterModule.forChild(ENTITY_STATES)],
+    declarations: [RegionComponent, RegionDetailComponent, RegionUpdateComponent, RegionDeleteDialogComponent, RegionDeletePopupComponent],
+    entryComponents: [RegionComponent, RegionUpdateComponent, RegionDeleteDialogComponent, RegionDeletePopupComponent],
+    providers: [RegionService, RegionResolve, RegionResolvePagingParams],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class BigDataForLifeRegionCustomModule {}
+export class Workflow2RegionModule {}

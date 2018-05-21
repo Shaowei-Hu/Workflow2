@@ -85,7 +85,7 @@ public class TraderServiceImplCustom implements TraderServiceCustom {
         log.debug("Request to get current Trader : {}");
         Optional<User> optionalUser = userService.getUserWithAuthorities();
         if(optionalUser.isPresent()){
-            String email = optionalUser.get().getEmail();
+            String email = optionalUser.get().getLogin();
             return traderRepositoryCustom.findByName(email);
         } else {
         	return null;

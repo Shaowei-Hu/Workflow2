@@ -1,28 +1,27 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { BigDataForLifeSharedModule } from '../../shared';
+import { Workflow2SharedModule } from 'app/shared';
 import {
     ActionService,
+    ActionComponent,
     ActionDetailComponent,
+    ActionUpdateComponent,
+    ActionDeletePopupComponent,
+    ActionDeleteDialogComponent,
+    actionRoute,
+    actionPopupRoute,
+    ActionResolve,
+    ActionResolvePagingParams
 } from './';
 
-@NgModule({
-    imports: [
-        BigDataForLifeSharedModule,
-    ],
-    declarations: [
-        ActionDetailComponent,
-    ],
-    entryComponents: [
-    ],
-    providers: [
-        ActionService,
+const ENTITY_STATES = [...actionRoute, ...actionPopupRoute];
 
-    ],
-    exports: [
-        ActionDetailComponent,
-    ],
+@NgModule({
+    imports: [Workflow2SharedModule, RouterModule.forChild(ENTITY_STATES)],
+    declarations: [ActionComponent, ActionDetailComponent, ActionUpdateComponent, ActionDeleteDialogComponent, ActionDeletePopupComponent],
+    entryComponents: [ActionComponent, ActionUpdateComponent, ActionDeleteDialogComponent, ActionDeletePopupComponent],
+    providers: [ActionService, ActionResolve, ActionResolvePagingParams],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class BigDataForLifeActionCustomModule {}
+export class Workflow2ActionModule {}

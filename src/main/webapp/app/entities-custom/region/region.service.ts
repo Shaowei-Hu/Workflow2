@@ -1,24 +1,38 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
-import { SERVER_API_URL } from '../../app.constants';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
-import { Region } from '../../entities/region/region.model';
-import { ResponseWrapper, createRequestOption } from '../../shared';
+import { SERVER_API_URL } from 'app/app.constants';
+import { createRequestOption } from 'app/shared';
+import { IRegion } from 'app/shared/model/region.model';
+
+type EntityResponseType = HttpResponse<IRegion>;
+type EntityArrayResponseType = HttpResponse<IRegion[]>;
 
 @Injectable()
 export class RegionService {
+    private resourceUrl = SERVER_API_URL + 'api/regions';
 
-    private resourceUrl = SERVER_API_URL + 'api/region';
-    private resourceSearchUrl = SERVER_API_URL + 'api/_search/region';
+    constructor(private http: HttpClient) {}
 
-    constructor(private http: Http) { }
-
-    searchByCode(req?: any): Observable<Region> {
-        return this.http.get(this.resourceSearchUrl + '/byCode/' + req)
-            .map((res: Response) => {
-                return res.json();
-            });
+    create(region: IRegion): Observable<EntityResponseType> {
+        return this.http.post<IRegion>(this.resourceUrl, region, { observe: 'response' });
     }
 
+    update(region: IRegion): Observable<EntityResponseType> {
+        return this.http.put<IRegion>(this.resourceUrl, region, { observe: 'response' });
+    }
+
+    find(id: number): Observable<EntityResponseType> {
+        return this.http.get<IRegion>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    }
+
+    query(req?: any): Observable<EntityArrayResponseType> {
+        const options = createRequestOption(req);
+        return this.http.get<IRegion[]>(this.resourceUrl, { params: options, observe: 'response' });
+    }
+
+    delete(id: number): Observable<HttpResponse<any>> {
+        return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    }
 }

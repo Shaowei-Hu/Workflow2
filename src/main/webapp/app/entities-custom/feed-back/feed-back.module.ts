@@ -1,28 +1,33 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { BigDataForLifeSharedModule } from '../../shared';
+import { Workflow2SharedModule } from 'app/shared';
 import {
     FeedBackService,
+    FeedBackComponent,
     FeedBackDetailComponent,
+    FeedBackUpdateComponent,
+    FeedBackDeletePopupComponent,
+    FeedBackDeleteDialogComponent,
+    feedBackRoute,
+    feedBackPopupRoute,
+    FeedBackResolve,
+    FeedBackResolvePagingParams
 } from './';
 
-@NgModule({
-    imports: [
-        BigDataForLifeSharedModule,
-    ],
-    declarations: [
-        FeedBackDetailComponent,
-    ],
-    entryComponents: [
-    ],
-    providers: [
-        FeedBackService,
+const ENTITY_STATES = [...feedBackRoute, ...feedBackPopupRoute];
 
-    ],
-    exports: [
+@NgModule({
+    imports: [Workflow2SharedModule, RouterModule.forChild(ENTITY_STATES)],
+    declarations: [
+        FeedBackComponent,
         FeedBackDetailComponent,
+        FeedBackUpdateComponent,
+        FeedBackDeleteDialogComponent,
+        FeedBackDeletePopupComponent
     ],
+    entryComponents: [FeedBackComponent, FeedBackUpdateComponent, FeedBackDeleteDialogComponent, FeedBackDeletePopupComponent],
+    providers: [FeedBackService, FeedBackResolve, FeedBackResolvePagingParams],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class BigDataForLifeFeedBackCustomModule {}
+export class Workflow2FeedBackModule {}

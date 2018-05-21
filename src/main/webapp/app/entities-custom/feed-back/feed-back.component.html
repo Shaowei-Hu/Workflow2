@@ -1,0 +1,68 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="workflow2App.feedBack.home.title">Feed Backs</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-feed-back" [routerLink]="['/feed-back/new']">
+            <span class="fas fa-plus"></span>
+            <span  jhiTranslate="workflow2App.feedBack.home.createLabel">
+            Create new Feed Back
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="feedBacks">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fas fa-sort"></span></th>
+            <th jhiSortBy="question1"><span jhiTranslate="workflow2App.feedBack.question1">Question 1</span> <span class="fas fa-sort"></span></th>
+            <th jhiSortBy="question2"><span jhiTranslate="workflow2App.feedBack.question2">Question 2</span> <span class="fas fa-sort"></span></th>
+            <th jhiSortBy="question3"><span jhiTranslate="workflow2App.feedBack.question3">Question 3</span> <span class="fas fa-sort"></span></th>
+            <th jhiSortBy="question4"><span jhiTranslate="workflow2App.feedBack.question4">Question 4</span> <span class="fas fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let feedBack of feedBacks ;trackBy: trackId">
+                <td><a [routerLink]="['/feed-back', feedBack.id, 'view' ]">{{feedBack.id}}</a></td>
+                <td>{{feedBack.question1}}</td>
+                <td>{{feedBack.question2}}</td>
+                <td>{{feedBack.question3}}</td>
+                <td>{{feedBack.question4}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/feed-back', feedBack.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fas fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/feed-back', feedBack.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <span class="fas fa-pencil-alt"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'feed-back/'+ feedBack.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fas fa-times"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="feedBacks && feedBacks.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

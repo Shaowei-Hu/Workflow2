@@ -16,6 +16,7 @@ import { Workflow2AppRoutingModule } from './app-routing.module';
 import { Workflow2HomeModule } from './home/home.module';
 import { Workflow2AccountModule } from './account/account.module';
 import { Workflow2EntityModule } from './entities/entity.module';
+import { Workflow2EntityCustomModule } from './entities-custom/entity.module';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import {
@@ -37,7 +38,8 @@ import {
         Workflow2CoreModule,
         Workflow2HomeModule,
         Workflow2AccountModule,
-        Workflow2EntityModule
+        Workflow2EntityModule,
+        Workflow2EntityCustomModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],

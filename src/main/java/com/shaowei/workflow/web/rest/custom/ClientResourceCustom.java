@@ -2,10 +2,15 @@ package com.shaowei.workflow.web.rest.custom;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +27,7 @@ import com.shaowei.workflow.service.custom.ClientServiceCustom;
 import com.shaowei.workflow.service.dto.ClientDTO;
 import com.shaowei.workflow.web.rest.errors.BadRequestAlertException;
 import com.shaowei.workflow.web.rest.util.HeaderUtil;
+import com.shaowei.workflow.web.rest.util.PaginationUtil;
 
 import io.github.jhipster.web.util.ResponseUtil;
 
@@ -48,7 +54,7 @@ public class ClientResourceCustom {
      * @return the ResponseEntity with status 201 (Created) and with body the new clientDTO, or with status 400 (Bad Request) if the client has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/client")
+    @PostMapping("/clients/current")
     @Timed
     public ResponseEntity<ClientDTO> createClient(@RequestBody ClientDTO clientDTO) throws URISyntaxException {
         log.debug("REST request to save Client : {}", clientDTO);
@@ -70,7 +76,7 @@ public class ClientResourceCustom {
      * or with status 500 (Internal Server Error) if the clientDTO couldn't be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PutMapping("/client")
+    @PutMapping("/clients/current")
     @Timed
     public ResponseEntity<ClientDTO> updateClient(@RequestBody ClientDTO clientDTO) throws URISyntaxException {
         log.debug("REST request to update Client : {}", clientDTO);
@@ -81,6 +87,15 @@ public class ClientResourceCustom {
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, clientDTO.getId().toString()))
             .body(result);
+    }
+    
+    @GetMapping("/clients/current")
+    @Timed
+    public ResponseEntity<List<ClientDTO>> getAllClients(Pageable pageable) {
+        log.debug("REST request to get a page of Clients");
+        Page<ClientDTO> page = clientServiceCustom.findClientsOfCurrentTrader(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/clients");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
 

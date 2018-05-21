@@ -1,0 +1,100 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="workflow2App.client.home.title">Clients</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-client" [routerLink]="['/client-custom/new']">
+            <span class="fas fa-plus"></span>
+            <span  jhiTranslate="workflow2App.client.home.createLabel">
+            Create new Client
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="clients">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fas fa-sort"></span></th>
+            <th jhiSortBy="clientCode"><span jhiTranslate="workflow2App.client.clientCode">Client Code</span> <span class="fas fa-sort"></span></th>
+            <th jhiSortBy="companyName"><span jhiTranslate="workflow2App.client.companyName">Company Name</span> <span class="fas fa-sort"></span></th>
+            <th jhiSortBy="location"><span jhiTranslate="workflow2App.client.location">Location</span> <span class="fas fa-sort"></span></th>
+            <th jhiSortBy="manager"><span jhiTranslate="workflow2App.client.manager">Manager</span> <span class="fas fa-sort"></span></th>
+            <th jhiSortBy="diagnostic"><span jhiTranslate="workflow2App.client.diagnostic">Diagnostic</span> <span class="fas fa-sort"></span></th>
+            <th jhiSortBy="companyNanme"><span jhiTranslate="workflow2App.client.companyNanme">Company Nanme</span> <span class="fas fa-sort"></span></th>
+            <th jhiSortBy="alert"><span jhiTranslate="workflow2App.client.alert">Alert</span> <span class="fas fa-sort"></span></th>
+            <th jhiSortBy="score"><span jhiTranslate="workflow2App.client.score">Score</span> <span class="fas fa-sort"></span></th>
+            <th jhiSortBy="businessSirteria1"><span jhiTranslate="workflow2App.client.businessSirteria1">Business Sirteria 1</span> <span class="fas fa-sort"></span></th>
+            <th jhiSortBy="businessSirteria2"><span jhiTranslate="workflow2App.client.businessSirteria2">Business Sirteria 2</span> <span class="fas fa-sort"></span></th>
+            <th jhiSortBy="businessData"><span jhiTranslate="workflow2App.client.businessData">Business Data</span> <span class="fas fa-sort"></span></th>
+            <th jhiSortBy="traderId"><span jhiTranslate="workflow2App.client.trader">Trader</span> <span class="fas fa-sort"></span></th>
+            <th jhiSortBy="regionName"><span jhiTranslate="workflow2App.client.region">Region</span> <span class="fas fa-sort"></span></th>
+            <th jhiSortBy="typeName"><span jhiTranslate="workflow2App.client.type">Type</span> <span class="fas fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let client of clients ;trackBy: trackId">
+                <td><a [routerLink]="['/client', client.id, 'view' ]">{{client.id}}</a></td>
+                <td>{{client.clientCode}}</td>
+                <td>{{client.companyName}}</td>
+                <td>{{client.location}}</td>
+                <td>{{client.manager}}</td>
+                <td>{{client.diagnostic}}</td>
+                <td>{{client.companyNanme}}</td>
+                <td>{{client.alert}}</td>
+                <td>{{client.score}}</td>
+                <td>{{client.businessSirteria1}}</td>
+                <td>{{client.businessSirteria2}}</td>
+                <td>{{client.businessData}}</td>
+                <td>
+                    <div *ngIf="client.traderId">
+                        <a [routerLink]="['../trader', client.traderId , 'view' ]" >{{client.traderId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="client.regionId">
+                        <a [routerLink]="['../region', client.regionId , 'view' ]" >{{client.regionName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="client.typeId">
+                        <a [routerLink]="['../type', client.typeId , 'view' ]" >{{client.typeName}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/client-custom', client.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fas fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/client-cutom', client.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <span class="fas fa-pencil-alt"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'client-custom/'+ client.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fas fa-times"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="clients && clients.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

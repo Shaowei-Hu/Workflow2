@@ -16,6 +16,17 @@
                 "type": "Type",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
+            "entities-custom": {
+                "main": "Mes Entités",
+                "trader": "Trader",
+                "team": "Team",
+                "client": "Client",
+                "action": "Action",
+                "feedBack": "Feed Back",
+                "region": "Region",
+                "type": "Type",
+                "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
+            },
             "account": {
                 "main": "Compte",
                 "settings": "Profil",

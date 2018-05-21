@@ -1,57 +1,24 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Rx';
-import { JhiEventManager } from 'ng-jhipster';
 
-import { TypeService } from '../../entities/type/type.service';
-import { Type } from '../../entities/type/type.model';
+import { IType } from 'app/shared/model/type.model';
 
 @Component({
-    selector: 'type-detail',
-    templateUrl: './type-detail.component.html',
-    styleUrls: [
-        'type.scss'
-    ]
+    selector: 'jhi-type-detail',
+    templateUrl: './type-detail.component.html'
 })
-export class TypeDetailComponent implements OnInit, OnDestroy {
+export class TypeDetailComponent implements OnInit {
+    type: IType;
 
-    @Input('type')
-    type: Type;
-    private subscription: Subscription;
-    private eventSubscriber: Subscription;
-
-    constructor(
-        private eventManager: JhiEventManager,
-        private typeService: TypeService,
-        private route: ActivatedRoute
-    ) {
-    }
+    constructor(private route: ActivatedRoute) {}
 
     ngOnInit() {
-        // this.subscription = this.route.params.subscribe((params) => {
-        //     this.load(params['id']);
-        // });
-        this.registerChangeInType();
-    }
-
-    load(id) {
-        this.typeService.find(id).subscribe((type) => {
-            this.type = type;
+        this.route.data.subscribe(({ type }) => {
+            this.type = type.body ? type.body : type;
         });
     }
+
     previousState() {
         window.history.back();
-    }
-
-    ngOnDestroy() {
-        // this.subscription.unsubscribe();
-        this.eventManager.destroy(this.eventSubscriber);
-    }
-
-    registerChangeInType() {
-        this.eventSubscriber = this.eventManager.subscribe(
-            'typeListModification',
-            (response) => this.load(this.type.id)
-        );
     }
 }
