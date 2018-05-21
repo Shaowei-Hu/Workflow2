@@ -1,14 +1,13 @@
 package com.shaowei.workflow.service;
 
-import com.shaowei.workflow.domain.Authority;
-import com.shaowei.workflow.domain.User;
-import com.shaowei.workflow.repository.AuthorityRepository;
-import com.shaowei.workflow.config.Constants;
-import com.shaowei.workflow.repository.UserRepository;
-import com.shaowei.workflow.security.AuthoritiesConstants;
-import com.shaowei.workflow.security.SecurityUtils;
-import com.shaowei.workflow.service.util.RandomUtil;
-import com.shaowei.workflow.service.dto.UserDTO;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,14 +16,21 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import com.shaowei.workflow.web.rest.errors.InvalidPasswordException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.*;
-import java.util.stream.Collectors;
+import com.shaowei.workflow.config.Constants;
+import com.shaowei.workflow.domain.Authority;
+import com.shaowei.workflow.domain.Trader;
+import com.shaowei.workflow.domain.User;
+import com.shaowei.workflow.repository.AuthorityRepository;
+import com.shaowei.workflow.repository.UserRepository;
+import com.shaowei.workflow.security.AuthoritiesConstants;
+import com.shaowei.workflow.security.SecurityUtils;
+import com.shaowei.workflow.service.dto.TraderDTO;
+import com.shaowei.workflow.service.dto.UserDTO;
+import com.shaowei.workflow.service.util.RandomUtil;
+import com.shaowei.workflow.web.rest.errors.InvalidPasswordException;
 
 /**
  * Service class for managing users.
@@ -42,12 +48,16 @@ public class UserService {
     private final AuthorityRepository authorityRepository;
 
     private final CacheManager cacheManager;
+    
+    private final TraderService traderService;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository,
+    		CacheManager cacheManager, TraderService traderService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
+        this.traderService = traderService;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -108,6 +118,9 @@ public class UserService {
         authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
         newUser.setAuthorities(authorities);
         userRepository.save(newUser);
+        TraderDTO traderDTO = new TraderDTO();
+        traderDTO.setName(newUser.getLogin());
+        traderService.save(traderDTO);
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
         return newUser;
