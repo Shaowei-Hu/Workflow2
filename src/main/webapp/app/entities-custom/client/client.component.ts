@@ -30,6 +30,8 @@ export class ClientComponent implements OnInit, OnDestroy {
     previousPage: any;
     reverse: any;
 
+    tab: string;
+
     constructor(
         private clientService: ClientService,
         private parseLinks: JhiParseLinks,
@@ -46,19 +48,33 @@ export class ClientComponent implements OnInit, OnDestroy {
             this.reverse = data.pagingParams.ascending;
             this.predicate = data.pagingParams.predicate;
         });
+        this.tab = 'current';
     }
 
     loadAll() {
-        this.clientService
-            .query({
-                page: this.page - 1,
-                size: this.itemsPerPage,
-                sort: this.sort()
-            })
-            .subscribe(
-                (res: HttpResponse<IClient[]>) => this.paginateClients(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+        if (this.tab === 'current') {
+            this.clientService
+                .query({
+                    page: this.page - 1,
+                    size: this.itemsPerPage,
+                    sort: this.sort()
+                })
+                .subscribe(
+                    (res: HttpResponse<IClient[]>) => this.paginateClients(res.body, res.headers),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        } else if (this.tab === 'team') {
+            this.clientService
+                .queryTeam({
+                    page: this.page - 1,
+                    size: this.itemsPerPage,
+                    sort: this.sort()
+                })
+                .subscribe(
+                    (res: HttpResponse<IClient[]>) => this.paginateClients(res.body, res.headers),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
     }
 
     loadPage(page: number) {
@@ -117,6 +133,11 @@ export class ClientComponent implements OnInit, OnDestroy {
             result.push('id');
         }
         return result;
+    }
+
+    setTab(tab: string) {
+        this.tab = tab;
+        this.loadAll();
     }
 
     private paginateClients(data: IClient[], headers: HttpHeaders) {

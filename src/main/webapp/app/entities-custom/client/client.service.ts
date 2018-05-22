@@ -31,6 +31,10 @@ export class ClientService {
         const options = createRequestOption(req);
         return this.http.get<IClient[]>(this.resourceUrl + '/current', { params: options, observe: 'response' });
     }
+    queryTeam(req?: any): Observable<EntityArrayResponseType> {
+        const options = createRequestOption(req);
+        return this.http.get<IClient[]>(this.resourceUrl + '/team', { params: options, observe: 'response' });
+    }
 
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });

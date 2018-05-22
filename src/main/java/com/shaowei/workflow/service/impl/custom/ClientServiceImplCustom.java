@@ -83,8 +83,23 @@ public class ClientServiceImplCustom implements ClientServiceCustom {
 	@Transactional(readOnly = true)
 	public Page<ClientDTO> findClientsOfCurrentTrader(Pageable pageable) {
         log.debug("Request to get all Clients");
-        Trader doctor = traderServiceCustom.findCurrentTrader();
-        return clientRepositoryCustom.findByTrader(doctor, pageable)
+        Trader trader = traderServiceCustom.findCurrentTrader();
+        return clientRepositoryCustom.findByTrader(trader, pageable)
+            .map(clientMapper::toDto);
+	}
+	
+    /**
+     * Get all the clients of current user.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities of current user
+     */
+	@Override
+	@Transactional(readOnly = true)
+	public Page<ClientDTO> findClientsOfCurrentTraderTeam(Pageable pageable) {
+        log.debug("Request to get all Clients");
+        Trader trader = traderServiceCustom.findCurrentTrader();
+        return clientRepositoryCustom.findByTraderNotAndTrader_Teams_Traders(trader, trader, pageable)
             .map(clientMapper::toDto);
 	}
 }

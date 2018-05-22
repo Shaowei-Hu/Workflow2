@@ -89,7 +89,7 @@ relationship ManyToOne {
 }
 
 relationship ManyToMany {
-	Team{trader} to Trader{team}
+	Team{trader(name)} to Trader{team}
 }
 
 

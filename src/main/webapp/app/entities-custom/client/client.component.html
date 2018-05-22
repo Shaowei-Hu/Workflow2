@@ -10,6 +10,14 @@
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a [ngClass]="(tab=='current') ? 'nav-link active' : 'nav-link'" (click)="setTab('current')">My Clients</a>
+        </li>
+        <li class="nav-item">
+            <a [ngClass]="(tab=='team') ? 'nav-link active' : 'nav-link'" (click)="setTab('team')">Clients of Team</a>
+        </li>
+    </ul>
     <div class="table-responsive" *ngIf="clients">
         <table class="table table-striped">
             <thead>
@@ -70,7 +78,7 @@
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/client-cutom', client.id, 'edit']"
+                                [routerLink]="['/client-custom', client.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <span class="fas fa-pencil-alt"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>

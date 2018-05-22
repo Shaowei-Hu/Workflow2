@@ -34,4 +34,12 @@ public interface ClientServiceCustom {
      * @return the list of entities
      */
     Page<ClientDTO> findClientsOfCurrentTrader(Pageable pageable);
+    
+    /**
+     * Get all the patients of current user.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
+    Page<ClientDTO> findClientsOfCurrentTraderTeam(Pageable pageable);
 }

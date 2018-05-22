@@ -97,6 +97,15 @@ public class ClientResourceCustom {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/clients");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+    
+    @GetMapping("/clients/team")
+    @Timed
+    public ResponseEntity<List<ClientDTO>> getAllClientsOfTeam(Pageable pageable) {
+        log.debug("REST request to get a page of Clients");
+        Page<ClientDTO> page = clientServiceCustom.findClientsOfCurrentTraderTeam(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/clients");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 
 
 }
