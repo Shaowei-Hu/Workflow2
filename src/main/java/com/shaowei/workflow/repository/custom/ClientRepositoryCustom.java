@@ -13,5 +13,5 @@ import com.shaowei.workflow.domain.Trader;
  */
 public interface ClientRepositoryCustom extends JpaRepository<Client, Long> {
     Page<Client> findByTrader(Trader trader, Pageable pageable);
-    Page<Client> findByTraderNotAndTrader_Teams_Traders(Trader trader, Trader current, Pageable pageable);
+    Page<Client> findByTrader_Teams_TradersAndTraderNot(Trader trader, Trader current, Pageable pageable);
 }

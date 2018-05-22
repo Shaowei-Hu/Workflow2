@@ -85,7 +85,7 @@ export class ClientComponent implements OnInit, OnDestroy {
     }
 
     transition() {
-        this.router.navigate(['/client'], {
+        this.router.navigate(['/client-custom'], {
             queryParams: {
                 page: this.page,
                 size: this.itemsPerPage,
@@ -98,7 +98,7 @@ export class ClientComponent implements OnInit, OnDestroy {
     clear() {
         this.page = 0;
         this.router.navigate([
-            '/client',
+            '/client-custom',
             {
                 page: this.page,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')

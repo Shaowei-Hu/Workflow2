@@ -18,7 +18,7 @@
                 <div class="form-group">
                     <label jhiTranslate="workflow2App.team.trader" for="field_trader">Trader</label>
                     <select class="form-control" id="field_trader" multiple name="trader" [(ngModel)]="team.traders">
-                        <option [ngValue]="getSelected(team.traders, traderOption)" *ngFor="let traderOption of traders; trackBy: trackTraderById">{{traderOption.id}}</option>
+                        <option [ngValue]="getSelected(team.traders, traderOption)" *ngFor="let traderOption of traders; trackBy: trackTraderById">{{traderOption.name}}</option>
                     </select>
                 </div>
             </div>

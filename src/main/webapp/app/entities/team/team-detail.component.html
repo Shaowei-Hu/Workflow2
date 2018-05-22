@@ -12,7 +12,7 @@
                 <dt><span jhiTranslate="workflow2App.team.trader">Trader</span></dt>
                 <dd>
                     <span *ngFor="let trader of team.traders; let last = last">
-                        <a [routerLink]="['/trader', trader?.id, 'view' ]">{{trader.id}}</a>{{last ? '' : ', '}}
+                        <a [routerLink]="['/trader', trader?.id, 'view' ]">{{trader.name}}</a>{{last ? '' : ', '}}
                     </span>
                 </dd>
             </dl>

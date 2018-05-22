@@ -99,7 +99,7 @@ public class ClientServiceImplCustom implements ClientServiceCustom {
 	public Page<ClientDTO> findClientsOfCurrentTraderTeam(Pageable pageable) {
         log.debug("Request to get all Clients");
         Trader trader = traderServiceCustom.findCurrentTrader();
-        return clientRepositoryCustom.findByTraderNotAndTrader_Teams_Traders(trader, trader, pageable)
+        return clientRepositoryCustom.findByTrader_Teams_TradersAndTraderNot(trader, trader, pageable)
             .map(clientMapper::toDto);
 	}
 }
